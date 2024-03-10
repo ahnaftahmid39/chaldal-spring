@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Guesser Game</title>
+<style>
+    /* Basic styling for the game */
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    input[type="number"] {
+        width: 80px;
+        padding: 8px;
+        font-size: 16px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    #result {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Number Guesser Game</h1>
+    <p>Guess a number between 1 and 100:</p>
+    <input type="number" id="guess" min="1" max="100">
+    <button onclick="checkGuess()">Check</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    // Generate a random number between 1 and 100
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    console.log("The random number is: " + randomNumber);
+
+    // Function to check the guessed number
+    function checkGuess() {
+        // Get the guessed number from the input field
+        const guess = parseInt(document.getElementById("guess").value);
+        
+        // Check if the guess is correct
+        if (guess === randomNumber) {
+            displayResult("Congratulations! You guessed the correct number.");
+        } else if (guess < randomNumber) {
+            displayResult("Too low. Try again.");
+        } else {
+            displayResult("Too high. Try again.");
+        }
+    }
+
+    // Function to display the result message
+    function displayResult(message) {
+        document.getElementById("result").textContent = message;
+    }
+</script>
+
+</body>
+</html>
+

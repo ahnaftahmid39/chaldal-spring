@@ -1,9 +1,12 @@
 package com.dsi.chaldal.services;
 
+import org.springframework.stereotype.Service;
+
 import com.dsi.chaldal.dtos.UserDTO;
 import com.dsi.chaldal.models.User;
 import com.dsi.chaldal.repositories.UserRepository;
 
+@Service
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
@@ -25,7 +28,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void deleteUser(Long id) {
-    userRepository.deleteById(id);
+    if (id != null)
+      userRepository.deleteById(id);
   }
 
   @Override
@@ -38,6 +42,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDTO updateUser(UserDTO userDTO) {
+    if (userDTO.getId() == null)
+      return null;
     User userModel = userRepository.findById(userDTO.getId()).orElse(null);
     if (userModel != null) {
       if (userDTO.getEmail() != null || "".equals(userDTO.getEmail()))
